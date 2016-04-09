@@ -1,0 +1,13 @@
+Package: SMVCIR
+Type: Package
+Title: Sliced Mean Variance Covariance Inverse Regression
+Version: 0.1
+Date: 2016-02-22
+Author: Joseph McKean, Dan McGuire
+Maintainer: Dan McGuire <daniel.j.mcguire@wmich.edu>
+Description: Sliced Mean Variance Covariance Inverse Regression (SMVCIR) is a form of discriminant analysis that takes into account not only location differences among classes, but also variance and covariance differences between classes.  It may be useful both as a classification technique as well as a graphical technique when discriminant coordinates are plotted, and clear separation between classes can be easily seen.
+License: None
+Imports: rgl
+Suggests: e1071, MASS, caret, misc3d
+LazyData: TRUE
+RoxygenNote: 5.0.1

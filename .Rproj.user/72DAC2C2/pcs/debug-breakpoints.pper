@@ -1,0 +1,51 @@
+{
+    "debugBreakpointsState" : {
+        "breakpoints" : [
+            {
+                "editor_line_number" : 81,
+                "editor_state" : 2,
+                "function_name" : "optimal_band",
+                "function_steps" : "",
+                "id" : 2,
+                "is_package_breakpoint" : false,
+                "is_pending_debug_completion" : false,
+                "line_number" : 81,
+                "needs_updated_steps" : true,
+                "package_name" : "",
+                "path" : "C:/Users/Dan/Desktop/Survival/kernel_estimator_ht.R",
+                "state" : 2,
+                "type" : 0
+            },
+            {
+                "editor_line_number" : 84,
+                "editor_state" : 2,
+                "function_name" : "optimal_band",
+                "function_steps" : "",
+                "id" : 3,
+                "is_package_breakpoint" : false,
+                "is_pending_debug_completion" : false,
+                "line_number" : 84,
+                "needs_updated_steps" : true,
+                "package_name" : "",
+                "path" : "C:/Users/Dan/Desktop/Survival/kernel_estimator_ht.R",
+                "state" : 2,
+                "type" : 0
+            },
+            {
+                "editor_line_number" : 23,
+                "editor_state" : 2,
+                "function_name" : "discrim_func",
+                "function_steps" : "",
+                "id" : 4,
+                "is_package_breakpoint" : false,
+                "is_pending_debug_completion" : false,
+                "line_number" : 23,
+                "needs_updated_steps" : false,
+                "package_name" : "",
+                "path" : "C:/Users/Dan/Desktop/smvcir/allocation.R",
+                "state" : 2,
+                "type" : 0
+            }
+        ]
+    }
+}

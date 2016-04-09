@@ -1,0 +1,18 @@
+{
+    "contents" : "summary.smvcir<-function(model,...){\n  cat(\"Call: \\n\")\n  print(model$call)\n  print(model$summary1)\n  print(model$summary2)\n  print(model$pvalmat)\n  print(model$dimCorr)\n  cat(\"\\nCoefficients:\\n\")\n  print(model$coefficients)\n\n}\n",
+    "created" : 1460029258564.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3621436134",
+    "id" : "C46E957D",
+    "lastKnownWriteTime" : 1460032011,
+    "path" : "C:/Users/Dan/Desktop/smvcir/smvcir_funcs/SMVCIR/R/summary_func.R",
+    "project_path" : "R/summary_func.R",
+    "properties" : {
+        "tempName" : "Untitled4"
+    },
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
