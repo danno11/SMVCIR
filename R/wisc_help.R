@@ -6,8 +6,6 @@
 #'
 #'@keywords datasets
 #'
-#'@references UCI Machine Learning Repository
-#'
 #'@source \href{http://www.is.umk.pl/projects/datasets.html}{UCI Machine Learning Repository}
 #'
 #'

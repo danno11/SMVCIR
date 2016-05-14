@@ -35,12 +35,10 @@ smvcir<-function (group, data, pdt = 100, level = 0.05, test = FALSE, scree_plot
   }
   if (groupindex == dim(data_nu)[2]) {
     stage1readydat <- data.matrix(data_nu)
-  }
-  else if (groupindex == 1) {
+  } else if (groupindex == 1) {
     stage1readydat <- data.matrix(data_nu[, c(2:dim(data_nu)[2],
                                               1)])
-  }
-  else {
+  } else {
     stage1readydat <- data.matrix(data_nu[, c(1:(groupindex -
                                                    1), (groupindex + 1):dim(data_nu)[2], groupindex)])
   }
@@ -292,18 +290,18 @@ smvcir<-function (group, data, pdt = 100, level = 0.05, test = FALSE, scree_plot
   }
   rownames(stdcoeffmat) <- prednames
   colnames(stdcoeffmat) <- paste("D", 1:k, sep = "")
-  printit <- matrix("", 1, 1)
-  printit[1, 1] <- "Standardized Coefficients"
-  rownames(printit) <- c("")
-  colnames(printit) <- c("")
-  print(printit, quote = FALSE)
-  if (empTest == TRUE | apempTest == TRUE) {
-    print(round(stdcoeffmat[, 1:max(min(chosenDIM, dpDIM),
-                                    1)], 3), quote = FALSE)
-  }
-  else {
-    print(round(stdcoeffmat[, 1:(max(dpDIM, 1))], 3), quote = FALSE)
-  }
+  #printit <- matrix("", 1, 1)
+  #printit[1, 1] <- "Standardized Coefficients"
+  #rownames(printit) <- c("")
+  #colnames(printit) <- c("")
+  #print(printit, quote = FALSE)
+  # if (empTest == TRUE | apempTest == TRUE) {
+  #   print(round(stdcoeffmat[, 1:max(min(chosenDIM, dpDIM),
+  #                                  1)], 3), quote = FALSE)
+  #}
+  #else {
+  #  print(round(stdcoeffmat[, 1:(max(dpDIM, 1))], 3), quote = FALSE)
+  #}
   colnames(stage1readydat) <- c(prednames, group)
   colnames(standat) <- c(prednames, group)
   transdat <- data.frame(wmati)
@@ -387,7 +385,7 @@ smvcir<-function (group, data, pdt = 100, level = 0.05, test = FALSE, scree_plot
     chosenDIM = NA
   }
   c_mat<-tmp.eig$vectors
-  muhat_ls<-aggregate(scale(data[,1:k]), list(data[,k+1]), mean)
+  muhat_ls<-aggregate(scale(stage1readydat[,1:k]), list(stage1readydat[,k+1]), mean)
   muhat_ls<-matrix(NA, nrow = g, ncol = k)
   for(i in 1:g){
     muhat_ls[i,1:k] <- colMeans(standat[ind==i,1:k])
@@ -421,14 +419,15 @@ smvcir<-function (group, data, pdt = 100, level = 0.05, test = FALSE, scree_plot
   # }
   #}#
   transdat[,k+1]<-factor(class_labels[transdat[,k+1]])
+
   smv <- list(groups = g, predictors = k, statdim = chosenDIM,
-              sighatz = sighatz, muhat_z = muhat_z, groupindex = groupindex, originalx = stage1readydat[,1:k],
+              sighatz = sighatz, muhat_z = muhat_z, groupindex = groupindex,
               class.props=class.props,
               muhat_ls = muhat_ls, xbar = xbar, sighatx = sighatx,
-              pdiscdim = dpDIM, TRANScm = TRANScm, maxTRANScm = maxTRANScm,
+              dimCorr = TRANScm, maxTRANScm = maxTRANScm,
               direct = transdat, compcases = compcases, spansetF = spansetF,
-              call = match.call(), coefficients = stdcoeffmat, dimCorr = printit, summary1 = printit1,
-              kernelF = kernel, x = x)
+              call = match.call(), coefficients = stdcoeffmat, originalx = stage1readydat[,1:k],
+              kernelF = kernel)
   attr(smv, "class") <- "smvcir"
   return(smv)
 }

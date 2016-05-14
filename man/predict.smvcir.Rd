@@ -6,7 +6,7 @@
 \usage{
 \method{predict}{smvcir}(model, newdata, type = "prob",
   coordinates_only = FALSE, method = "centroid",
-  maxdim = model$predictors)
+  maxdim = model$predictors, kernel = NULL)
 }
 \arguments{
 \item{type}{Either "prob" for class probabilities, or "class" for class predictions.}

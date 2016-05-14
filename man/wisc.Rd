@@ -71,8 +71,5 @@ plotSVM3d<-function(x, y, kernel = "radial", ...){
 plotSVM3d(x = coords[,1:3], coords[,10], kernel = "linear") ###Visualize a support vector machine model with our coordinates
 plotSVM3d(x = coords[,1:3], coords[,10], kernel = "radial")
 }
-\references{
-UCI Machine Learning Repository
-}
 \keyword{datasets}
 

@@ -1,4 +1,4 @@
-plotit2D<-function (wmat, dimensions, groups, method, build_svm, kernel)
+plotit2D<-function (wmat, dimensions, groups, method, build_svm, kernel, svmModel)
 {
   if(build_svm==TRUE){
     if(!require("e1071")){
@@ -10,10 +10,18 @@ plotit2D<-function (wmat, dimensions, groups, method, build_svm, kernel)
     if(is.null(kernel)){
       kernel<-"radial"
     }
-
+    if(!is.null(svmModel)){
+      mod_obj<-svmModel
+    } else{
      k = length(wmat[1, ]) - 1
-     mod_obj<-svm(as.formula(paste(names(wmat)[k+1],"~ .")), kernel = kernel, data = wmat)
-     slice<-lapply(wmat[,1:k], median)
+     #mod_obj<-svm(as.formula(paste(names(wmat)[k+1],"~ .")), kernel = kernel, data = wmat)
+     mod_obj<-svm(as.formula(c(paste(names(wmat)[k+1],"~"), paste(names(wmat)[dimensions],
+                                   collapse = "+"))), kernel = kernel,
+                  data = wmat)
+    }
+     #slice<-lapply(wmat[,1:k], median)
+     slice<-lapply(wmat[,dimensions], median)
+
 
   }
   def.par <- par(no.readonly = TRUE)

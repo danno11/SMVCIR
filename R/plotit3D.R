@@ -1,4 +1,4 @@
-plotit3D<-function (wmat, coords, groups, ID, compcases, build_svm, groupcol, kernel)
+plotit3D<-function (wmat, coords, groups, ID, compcases, build_svm, groupcol, kernel, svmModel)
 {
   if(!require("rgl")){
     stop("The package rgl must be installed.")
@@ -106,6 +106,7 @@ plotit3D<-function (wmat, coords, groups, ID, compcases, build_svm, groupcol, ke
       ic <- ic + ssgroup[i]
     }
   }
+
   if(build_svm==TRUE){
     if(!require("e1071")){
       stop("The package e1071 needs to be installed.")
@@ -120,9 +121,14 @@ plotit3D<-function (wmat, coords, groups, ID, compcases, build_svm, groupcol, ke
       kernel<-"radial"
     }
 
-    svmx<-wmat[,coords]
+    svmx<-wmat[,dimensions]
     svmy<-wmat[,groupcol]
-    svm_mod<-svm(x = svmx, y = svmy, kernel=kernel, type = "C-classification")
+
+    if(!is.null(svmModel)){
+      svm_mod<-svmModel
+    } else{
+      svm_mod<-svm(x = svmx, y = svmy, kernel=kernel, type = "C-classification")
+    }
     n=100
     nnew = 50
     newdat.list = lapply(svmx, function(svmx) seq(min(svmx), max(svmx), len=nnew))
@@ -131,6 +137,6 @@ plotit3D<-function (wmat, coords, groups, ID, compcases, build_svm, groupcol, ke
     newdat.dv   = attr(newdat.pred, 'decision.values')
     newdat.dv   = array(newdat.dv, dim=rep(nnew, 3))
     # Fit/plot an isosurface to the decision boundary
-    contour3d(newdat.dv, level=0, x=newdat.list[[1]], y=newdat.list[[2]], z=newdat.list[[3]], add=T)
+    contour3d(newdat.dv, level=0, x=newdat.list[[coords[1]]], y=newdat.list[[coords[2]]], z=newdat.list[[coords[3]]], add=T)
   }
 }

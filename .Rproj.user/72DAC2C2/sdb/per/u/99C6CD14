@@ -1,0 +1,18 @@
+{
+    "contents" : "} else if (method==\"svm\"){\n  \n  data(pima)\n  library(caret)\n  train<-createDataPartition(pima$diabetes, p = .8, list = F)###Create a training set using 80% of dataset\n  pim.smv<-smvcir(\"diabetes\", data = pima[train,], test = T) ###Build smvcir model on training set\n  preds<-predict(pim.smv, newdata = pima[-train,], type = \"class\")\n  table(preds, pima$diabetes[-train])  ###Check accuracy\n  \n  library(e1071)\n  data(\"banknote\")\n  \n  svmOb<-svm(diabetes~., data = pim.smv$direct[,c(1:3, 9)], probability = TRUE,\n             kernel = \"radial\")\n  \n  plotcoords(pim.smv, dimensions = 1:3, GL = TRUE, build_svm = TRUE, svmModel = svmOb)\n  \n  \n  predict(svmOb,)\n  set.seed(10)\n  train<-sample(1:nrow(banknote), nrow(banknote)*.8, replace = FALSE)\n  banksmv<-smvcir(\"Y\", data = banknote[train,], test = TRUE)\n  svmModel<-svm(Y~., data = banksmv$direct[,c(1:3,7) ], probability = TRUE)\n  bcoords<-predict(banksmv, newdata = banknote[-train,], coordinates_only = TRUE, maxdim = 3)\n  bcoords$Y<-banknote[-train,]$Y\n  \n  plotcoords(bcoords, dimensions = 1:3, GL = FALSE, build_svm = TRUE, svmModel = svmModel)\n  plotcoords(bcoords, dimensions = 1:3, GL = TRUE, build_svm = TRUE)\n  \n  \n  if(build_svm==TRUE){\n    if(!require(\"e1071\")){\n      stop(\"The package e1071 needs to be installed.\")\n    }\n    if(!require(\"misc3d\")){\n      stop(\"The package misc3d must be installed.\")\n    }\n    if(numg > 2){\n      stop(\"svm can only be built for binary classification.\")\n    }\n    if(is.null(kernel)){\n      kernel<-\"radial\"\n    }\n    \n    svmx<-wmat[,coords]\n    svmy<-wmat[,groupcol]\n    \n    if(!is.null(svmModel)){\n      svm_mod<-svmModel\n    } else{\n      svm_mod<-svm(x = svmx, y = svmy, kernel=kernel, type = \"C-classification\")\n    }\n    n=100\n    nnew = 50\n    newdat.list = lapply(svmx, function(svmx) seq(min(svmx), max(svmx), len=nnew))\n    newdat      = expand.grid(newdat.list)\n    newdat.pred = predict(svm_mod, newdata=newdat, decision.values=T)\n    newdat.dv   = attr(newdat.pred, 'decision.values')\n    newdat.dv   = array(newdat.dv, dim=rep(nnew, 3))\n    # Fit/plot an isosurface to the decision boundary\n    contour3d(newdat.dv, level=0, x=newdat.list[[1]], y=newdat.list[[2]], z=newdat.list[[3]], add=T)\n  }\n}",
+    "created" : 1460505255668.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "1301901414",
+    "id" : "99C6CD14",
+    "lastKnownWriteTime" : 7011605692497750387,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled7"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

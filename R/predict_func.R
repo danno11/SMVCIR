@@ -11,7 +11,7 @@
 #'@export
 
 predict.smvcir<-function(model, newdata, type = "prob", coordinates_only = FALSE, method = "centroid",
-                         maxdim = model$predictors){
+                         maxdim = model$predictors, kernel=NULL){
 
 
   muhat_z<-model$muhat_z[,1:maxdim]
@@ -48,6 +48,7 @@ predict.smvcir<-function(model, newdata, type = "prob", coordinates_only = FALSE
   xx<-standat%*%c_mat
   colnames(xx)<-c(paste("D", rep(1:k), sep = ""))
   xx<-xx[,1:maxdim]
+
   ###Mahalanobis Distance from centroid
 
   centroid.distem<-matrix(NA, nrow(xx), g)
@@ -79,10 +80,11 @@ predict.smvcir<-function(model, newdata, type = "prob", coordinates_only = FALSE
   rownames(ind.prob)<-rownames(xx)
   colnames(ind.prob)<-levels(newdata[,groupindex])
 
-  if(coordinates_only == FALSE){
-    return(prob = ind.prob)
-  } else {
 
-    return(data.frame(xx))
+    if(coordinates_only == FALSE){
+      return(prob=ind.prob)
+    } else{
+      return(data.frame(xx))
+    }
   }
-}
+

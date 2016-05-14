@@ -1,5 +1,5 @@
 plotit<-function (x, dimensions = c(1, 2), groups = 1:10, GL = FALSE,
-          ID = FALSE, build_svm = FALSE, kernel = NULL, method = "SMVCIR")
+          ID = FALSE, build_svm = FALSE, kernel = NULL, svmModel, method = "SMVCIR")
 {
   if(class(x)=="smvcir"){
     groupnum<-x$groups
@@ -80,11 +80,11 @@ plotit<-function (x, dimensions = c(1, 2), groups = 1:10, GL = FALSE,
   else {
     if (GL == TRUE) {
       plotit3D(wmat = datmat, coords = dimensions, groups = groups,
-               ID = ID, compcases = compcases, build_svm = build_svm, groupcol = groupcol, kernel=kernel)
+               ID = ID, compcases = compcases, build_svm = build_svm, groupcol = groupcol, kernel=kernel, svmModel = svmModel)
     }
     else {
       plotit2D(wmat = datmat, dimensions = dimensions,
-               groups = groups, method = method, build_svm = build_svm, kernel = kernel)
+               groups = groups, method = method, build_svm = build_svm, kernel = kernel, svmModel = svmModel)
     }
   }
 }
