@@ -26,16 +26,16 @@ plotit3D<-function (wmat, coords, groups, ID, compcases, build_svm, groupcol, ke
   zz2 <- z2[newindi]
   zz3 <- z3[newindi]
   zoorder <- oorder[newindi]
-  xl = c(min(zz2), max(zz2))
-  yl = c(min(zz1), max(zz1))
+  xl = c(min(zz1), max(zz1)) ###changes zz2->zz1 here
+  yl = c(min(zz2), max(zz2))
   zl = c(min(zz3), max(zz3))
   colors <- c("black", "red", "blue", "orange", "purple", "brown",
               "green", "pink", "yellow", "aquamarine")
   open3d()
-  plot3d(x = zz2, y = zz1, z = zz3, xlab = "", ylab = "", zlab = "",
+  plot3d(x = zz1, y = zz2, z = zz3, xlab = "", ylab = "", zlab = "",   ###and here
          type = "n")
-  decorate3d(xl, yl, zl, xlab = paste("D", coords[2], sep = ""),
-             ylab = paste("D", coords[1], sep = ""), zlab = paste("D",
+  decorate3d(xl, yl, zl, xlab = paste("D", coords[1], sep = ""),
+             ylab = paste("D", coords[2], sep = ""), zlab = paste("D",
                                                                   coords[3], sep = ""))
   ic <- 0
   coli <- 0
@@ -50,27 +50,27 @@ plotit3D<-function (wmat, coords, groups, ID, compcases, build_svm, groupcol, ke
     start <- ic + 1
     stop <- ic + ssgroup[i]
     if (there == 1) {
-      points3d(zz2[start:stop], zz1[start:stop], zz3[start:stop],
+      points3d(zz1[start:stop], zz2[start:stop], zz3[start:stop],
                color = colors[i], size = 7)
       there <- 0
     }
     ic <- ic + ssgroup[i]
   }
-  x <- zz2
-  y <- zz1
+  x <- zz1
+  y <- zz2
   z <- zz3
   kept <- rep(0, n)###change length(x) to length(n)
   dispdat <- data.frame(zoorder, x, y, z, kept)
-  names(dispdat) <- c("Obs #", paste("D", coords[2], sep = ""),
-                      paste("D", coords[1], sep = ""), paste("D", coords[3],
+  names(dispdat) <- c("Obs #", paste("D", coords[1], sep = ""),
+                      paste("D", coords[2], sep = ""), paste("D", coords[3],
                                                              sep = ""), "keep")
   while (ID) {
     f <- select3d(button = c("right"))
     dispdat[, 5] <- f(dispdat[, 2], dispdat[, 3], dispdat[,
                                                           4])
     rgl.clear()
-    decorate3d(xl, yl, zl, xlab = paste("D", coords[2], sep = ""),
-               ylab = paste("D", coords[1], sep = ""), zlab = paste("D",
+    decorate3d(xl, yl, zl, xlab = paste("D", coords[1], sep = ""),
+               ylab = paste("D", coords[2], sep = ""), zlab = paste("D",
                                                                     coords[3], sep = ""))
     ic <- 0
     coli <- 0
@@ -115,7 +115,7 @@ plotit3D<-function (wmat, coords, groups, ID, compcases, build_svm, groupcol, ke
       stop("The package misc3d must be installed.")
     }
     if(numg > 2){
-      stop("svm can only be built for binary classification.")
+      stop("svm can only be built here for binary classification.")
     }
     if(is.null(kernel)){
       kernel<-"radial"
@@ -127,9 +127,8 @@ plotit3D<-function (wmat, coords, groups, ID, compcases, build_svm, groupcol, ke
     if(!is.null(svmModel)){
       svm_mod<-svmModel
     } else{
-      svm_mod<-svm(x = svmx, y = svmy, kernel=kernel, type = "C-classification")
+      svm_mod<-svm(x = svmx, y = svmy, kernel=kernel, type = "C-classification", scale = FALSE)
     }
-    n=100
     nnew = 50
     newdat.list = lapply(svmx, function(svmx) seq(min(svmx), max(svmx), len=nnew))
     newdat      = expand.grid(newdat.list)

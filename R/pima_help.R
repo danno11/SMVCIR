@@ -8,7 +8,7 @@
 #'
 #'@references UCI Machine Learning Repository
 #'
-#'@source \href{http://www.is.umk.pl/projects/datasets.html}{UCI Machine Learning Repository}
+#'@source \href{http://archive.ics.uci.edu/ml/datasets/Pima+Indians+Diabetes}{UCI Machine Learning Repository}
 #'
 #'
 #'Class Variable: "diabetes" 0 = no diabetes, 1 = diabetes

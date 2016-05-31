@@ -9,6 +9,15 @@
 #'@param test Types of tests, can use either, neither, or both.
 #'@param empsimss Number of draws to use in performing each dimensionality test.
 #'@param scree_plot If TRUE, a scree plot of cumulative percentage of variation explained by discriminant dimensions is produced.
+#'
+#'@examples
+#'
+#'
+#'library(caret)
+#'train<-createDataPartition(pima$diabetes, p = .8, list = FALSE)
+#'pim.smv<-smvcir("diabetes", data = pima[train,], test = T) ###Build smvcir model on training set
+#'summary(pim.smv)
+#'
 #'@export
 
 
@@ -245,13 +254,14 @@ smvcir<-function (group, data, pdt = 100, level = 0.05, test = FALSE, scree_plot
                          round(sumsing[dpDIM], 0), "% Discrimination", sep = "")
   rownames(printit1) <- rep("", 7)
   colnames(printit1) <- rep("", 1)
-  print(printit1, quote = FALSE)  ##First output for summary function
+  #print(printit1, quote = FALSE)  ##First output for summary function
+  pvalmat<-NULL
   if (empTest == TRUE | apempTest == TRUE) {
     printit2 <- matrix("", 1, 1)
     printit2[1, 1] <- "Dimensionality Test P-Values"
     rownames(printit2) <- c("")
     colnames(printit2) <- c("")
-    print(printit2, quote = FALSE)
+    #print(printit2, quote = FALSE)
     if (apempTest == TRUE & empTest == TRUE) {
       pvalmat <- round(cbind(emppvals, apemppvals), 3)
       colnames(pvalmat) <- c("Empirical", "Approximate Empirical")
@@ -278,7 +288,7 @@ smvcir<-function (group, data, pdt = 100, level = 0.05, test = FALSE, scree_plot
       }
     }
     rownames(pvalmat) <- rownamesIt
-    print(pvalmat, quote = FALSE)
+    #print(pvalmat, quote = FALSE)
   }
   prednames <- rep("", k)
   i = 1
@@ -370,12 +380,12 @@ smvcir<-function (group, data, pdt = 100, level = 0.05, test = FALSE, scree_plot
                     1, 1)
   rownames(printit) <- c("")
   colnames(printit) <- c("")
-  print(printit, quote = FALSE)
+  #print(printit, quote = FALSE)
   printit <- matrix(paste("Maximum SMVCIR dimension correlation: ",
                           maxTRANScm, sep = ""), 1, 1)
   rownames(printit) <- c("")
   colnames(printit) <- c("")
-  print(printit, quote = FALSE)
+  #print(printit, quote = FALSE)
   printit <- matrix("SMVCIR correlations.", 1, 1)
   rownames(printit) <- c("")
   colnames(printit) <- c("")
@@ -419,15 +429,15 @@ smvcir<-function (group, data, pdt = 100, level = 0.05, test = FALSE, scree_plot
   # }
   #}#
   transdat[,k+1]<-factor(class_labels[transdat[,k+1]])
-
-  smv <- list(groups = g, predictors = k, statdim = chosenDIM,
+  if(is.null(pvalmat)){pvalmat<-"No dimensionality test performed"}
+  smv <-list(groups = g, predictors = k, statdim = chosenDIM,
               sighatz = sighatz, muhat_z = muhat_z, groupindex = groupindex,
               class.props=class.props,
               muhat_ls = muhat_ls, xbar = xbar, sighatx = sighatx,
               dimCorr = TRANScm, maxTRANScm = maxTRANScm,
               direct = transdat, compcases = compcases, spansetF = spansetF,
               call = match.call(), coefficients = stdcoeffmat, originalx = stage1readydat[,1:k],
-              kernelF = kernel)
+              kernel = kernelF, summary1 = noquote(printit1), pvalmat = pvalmat)###switch kernel & kernelF
   attr(smv, "class") <- "smvcir"
-  return(smv)
+  smv
 }

@@ -1,0 +1,17 @@
+{
+    "contents" : "#'@export\nsummary.smvcir<-function(model,...){\n  cat(\"Call: \\n\")\n  print(model$call)\n  print(model$summary1)\n  cat(\"\\nDimensionality Test P-Values\\n\")\n  print(model$pvalmat)\n  cat(\"\\nCorrelations between Dimensions \\n\")\n  print(model$dimCorr)\n  cat(\"\\nSMVCIR dimensions should have low correlations.\n      \\nMaximum SMVCIR dimension correlation: \",model$maxTRANScm)\n  cat(\"\\nCoefficients:\\n\")\n  print(model$coefficients)\n}\n",
+    "created" : 1464539039090.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2270470976",
+    "id" : "43BAA898",
+    "lastKnownWriteTime" : 1464539111,
+    "path" : "C:/Users/Dan/Desktop/smvcir/smvcir_funcs/SMVCIR/R/summary.R",
+    "project_path" : "R/summary.R",
+    "properties" : {
+    },
+    "relative_order" : 12,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

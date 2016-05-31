@@ -6,7 +6,7 @@
 \title{Pima Indian diabetes dataset}
 \format{An object of class \code{data.frame} with 768 rows and 9 columns.}
 \source{
-\href{http://www.is.umk.pl/projects/datasets.html}{UCI Machine Learning Repository}
+\href{http://archive.ics.uci.edu/ml/datasets/Pima+Indians+Diabetes}{UCI Machine Learning Repository}
 
 
 Class Variable: "diabetes" 0 = no diabetes, 1 = diabetes

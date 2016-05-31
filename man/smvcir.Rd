@@ -25,4 +25,13 @@ smvcir(group, data, pdt = 100, level = 0.05, test = FALSE,
 \description{
 Build a Sliced Mean Variance Covariance Inverse Regression model.
 }
+\examples{
+
+
+library(caret)
+train<-createDataPartition(pima$diabetes, p = .8, list = FALSE)
+pim.smv<-smvcir("diabetes", data = pima[train,], test = T) ###Build smvcir model on training set
+summary(pim.smv)
+
+}
 

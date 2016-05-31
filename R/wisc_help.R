@@ -6,7 +6,7 @@
 #'
 #'@keywords datasets
 #'
-#'@source \href{http://www.is.umk.pl/projects/datasets.html}{UCI Machine Learning Repository}
+#'@source \href{http://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Original)}{UCI Machine Learning Repository}
 #'
 #'
 #'Class Variable Tumor Type "tumor": "malignant" or "benign"

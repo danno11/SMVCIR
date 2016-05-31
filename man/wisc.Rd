@@ -6,7 +6,7 @@
 \title{Wisconsin Breast Cancer dataset}
 \format{An object of class \code{data.frame} with 683 rows and 10 columns.}
 \source{
-\href{http://www.is.umk.pl/projects/datasets.html}{UCI Machine Learning Repository}
+\href{http://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Original)}{UCI Machine Learning Repository}
 
 
 Class Variable Tumor Type "tumor": "malignant" or "benign"
