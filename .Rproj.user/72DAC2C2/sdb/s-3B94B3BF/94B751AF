@@ -1,0 +1,17 @@
+{
+    "contents" : "#'Plot smvcir discriminant coordinates\n#'\n#'Plots specified dimensions of smvcir space.\n#'\n#'@param x Either an smvcir model object or a data frame of discriminant coordinates.\n#'@param dimensions Dimensions to be plotted. Must have three if a 3d plot is desired.  Otherwise pairwise plots are produced.\n#'@param GL If GL = TRUE and three dimensions above are specified, a three-dimensional plot using the rgl package will be produced.\n#'@param build_svm If build_svm=TRUE, a support vector machine model is built using the dimensions specificied as covariates,\n#'and can be visualized with respect to the plotted dimensions.\n#'@param svmModel If desired, this option may be used to plot new coordinates along with an svm model built from other data coordinates\n#'(possibly desirable if training/testing splits are used).  The svmModel specified must also use the same covariates as those to be plotted.\n#'See example below.\n#'\n#'\n#'@examples\n#'\n#'library(caret)\n#'train<-createDataPartition(pima$diabetes, p = .8, list = FALSE)\n#'pim.smv<-smvcir(\"diabetes\", data = pima[train,], test = T) ###Build smvcir model on training set\n#'pred_coords<-predict(pim.smv, newdata = pima[-train,], coordinates_only = TRUE)\n#'pred_coords$diabetes<-pima$diabetes[-train]\n#'\n#'plotcoords(pred_coords, dimensions = 1:8)\n#'plotcoords(pred_coords, dimensions = 1:3, GL = TRUE, build_svm = TRUE)\n#'plotcoords(pred_coords, dimensions = 1:3, build_svm = TRUE)\n#'\n#'data(banknote)\n#'###Create training rows for Banknote data\n#'train<-sample(1:nrow(banknote), nrow(banknote)*.8, replace = FALSE)\n#'####Build smvcir model on training set\n#'banksmv<-smvcir(\"Y\", data = banknote[train,], test = TRUE)\n#'####Build svm model on first three dimensions of smvcir discriminant coordinates\n#'svmModel<-svm(Y~., data = banksmv$direct[,c(1:3,7) ], probability = TRUE)\n#'\n#'###Get discriminant coordinates from test set\n#'bcoords<-predict(banksmv, newdata = banknote[-train,], coordinates_only = TRUE, maxdim = 3)\n#'bcoords$Y<-banknote[-train,]$Y\n#'\n#'####Plot test set coordinates with respect to svm model built from training set\n#'plotcoords(bcoords, dimensions = 1:3, GL = TRUE, build_svm = TRUE, svmModel = svmModel)\n#'\n#'@export\nplotcoords<-function (x, dimensions = c(1, 2), groups = 1:10, GL = FALSE,\n                       ID = FALSE, build_svm = FALSE, kernel = NULL, svmModel = NULL)\n{\n\n  plotit(x, dimensions, groups, GL, ID, build_svm, kernel, svmModel, method = \"SMVCIR\")\n}\n",
+    "created" : 1468877434165.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "479532870",
+    "id" : "94B751AF",
+    "lastKnownWriteTime" : 1463172013,
+    "path" : "C:/Users/Dan/Desktop/smvcir/smvcir_funcs/SMVCIR/R/plotcoords.R",
+    "project_path" : "R/plotcoords.R",
+    "properties" : {
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

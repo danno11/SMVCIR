@@ -121,7 +121,7 @@ plotit3D<-function (wmat, coords, groups, ID, compcases, build_svm, groupcol, ke
       kernel<-"radial"
     }
 
-    svmx<-wmat[,dimensions]
+    svmx<-wmat[,coords]
     svmy<-wmat[,groupcol]
 
     if(!is.null(svmModel)){
